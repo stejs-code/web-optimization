@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Blank | Task Manager</title>
+</head>
+<body class="bg-slate-950 text-slate-50 overflow-x-hidden">
+
+<nav class="fixed inset-x-0 border-b border-solid border-b-slate-800 backdrop-blur-md px-4 bg-black/30 z-10">
+    <div class="flex mx-auto max-w-4xl py-2 px-4 ">
+        <a href="/index.html" class="font-bold py-2">Blank</a>
+        <ul class="flex gap-x-8 ml-auto">
+            <li class="">
+                <a href="/links.html" class="block py-2 text-sm hover:underline">URL Shortener</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="pt-16"></div>
+<main class="mx-auto max-w-4xl mt-4 sm:mt-6 px-4">
+    <h1 class="text-3xl sm:text-5xl sm:leading-12 font-bold mb-8 ">URL Shortener</h1>
+
+    <div class="mt-8">
+        <form action="." method="POST" class="max-w-md">
+            <div class="">
+                <label for="link_suffix" class="block text-sm/6 font-medium text-white">Link</label>
+                <div class="mt-2 flex gap-x-4 flex-wrap gap-y-2">
+                    <div class="flex items-center rounded-md grow bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-500">
+                        <!--     TODO: replace with an env var      -->
+                        <div class="text-base text-gray-400 select-none sm:text-sm/6 max-sm:text-sm">
+                            blank.zp.stejs.cz/
+                        </div>
+                        <input autocomplete="off" type="text" name="link_suffix" id="link_suffix" placeholder="my-link"
+                               class="block min-w-18 sm:min-w-40 max-sm:w-0 w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base text-white placeholder:text-gray-500 focus:outline-none sm:text-sm/6"/>
+                    </div>
+
+                    <button type="button"
+                            class="border bg-purple-600/20 border-purple-600 rounded-lg px-6 py-1.5 max-sm:grow">
+                        Randomize
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <label for="link_destination" class="block text-sm/6 font-medium text-white">Link destination</label>
+                <div class="mt-2 flex">
+                    <input autocomplete="off" type="text" name="link_destination" id="link_destination"
+                           placeholder="https://www.google.com"
+                           class="rounded-md bg-white/5 pl-3 outline-1 -outline-offset-1 outline-white/10 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 block min-w-0 grow py-1.5 pr-3 text-base text-white placeholder:text-gray-500 sm:text-sm/6"/>
+                </div>
+            </div>
+
+            <button type="submit" class="bg-purple-600 rounded-lg px-6 py-2 mt-4">
+                Create
+            </button>
+
+        </form>
+
+
+        <h2 class="text-3xl sm:text-4xl sm:leading-12 font-bold mb-0 mt-12">My Links</h2>
+        <div class="flex flex-col">
+
+            <div class="not-last:border-b border-solid border-b-slate-800 py-8">
+                <div class="">
+                    <div class="">
+                        <a href="https://link.zp.stejs.cz/amazing-link"
+                           class="underline text-lg sm:text-2xl font-bold">link.zp.stejs.cz/amazing-link</a>
+
+                        <!--          only a copy icon and interaction to copy to clipboard             -->
+                        <button type="button"
+                                class="select-none ml-4 bg-slate-50 text-purple-600 rounded-lg px-4 py-1 text-sm">
+                            Copy link
+                        </button>
+
+                        <button class="bg-red-600/10 border border-red-600 rounded-lg px-4 py-1 text-sm mt-2 ml-4">
+                            Delete
+                        </button>
+                    </div>
+
+                    <p><span class="text-slate-400 select-none">Destination: </span> https://google.com</p>
+                </div>
+            </div>
+
+
+            <div class="not-last:border-b border-solid border-b-slate-800 py-8">
+                <div class="">
+                    <div class="">
+                        <a href="https://link.zp.stejs.cz/amazing-link"
+                           class="underline text-lg sm:text-2xl font-bold">link.zp.stejs.cz/amazing-link</a>
+
+                        <!--          only a copy icon and interaction to copy to clipboard             -->
+                        <button type="button"
+                                class="select-none ml-4 bg-slate-50 text-purple-600 rounded-lg px-4 py-1 text-sm">
+                            Copy link
+                        </button>
+
+                        <button class="bg-red-600/10 border border-red-600 rounded-lg px-4 py-1 text-sm mt-2 ml-4">
+                            Delete
+                        </button>
+                    </div>
+
+                    <p><span class="text-slate-400 select-none">Destination: </span> https://google.com</p>
+                </div>
+            </div>
+
+            <div class="not-last:border-b border-solid border-b-slate-800 py-8">
+                <div class="">
+                    <div class="">
+                        <a href="https://link.zp.stejs.cz/amazing-link"
+                           class="underline text-lg sm:text-2xl font-bold">link.zp.stejs.cz/amazing-link</a>
+
+                        <!--          only a copy icon and interaction to copy to clipboard             -->
+                        <button type="button"
+                                class="select-none ml-4 bg-slate-50 text-purple-600 rounded-lg px-4 py-1 text-sm">
+                            Copy link
+                        </button>
+
+                        <button class="bg-red-600/10 border border-red-600 rounded-lg px-4 py-1 text-sm mt-2 ml-4">
+                            Delete
+                        </button>
+                    </div>
+
+                    <p><span class="text-slate-400 select-none">Destination: </span> https://google.com</p>
+                </div>
+            </div>
+
+            <div class="not-last:border-b border-solid border-b-slate-800 py-8">
+                <div class="">
+                    <div class="">
+                        <a href="https://link.zp.stejs.cz/amazing-link"
+                           class="underline text-lg sm:text-2xl font-bold">link.zp.stejs.cz/amazing-link</a>
+
+                        <!--          only a copy icon and interaction to copy to clipboard             -->
+                        <button type="button"
+                                class="select-none ml-4 bg-slate-50 text-purple-600 rounded-lg px-4 py-1 text-sm">
+                            Copy link
+                        </button>
+
+                        <button class="bg-red-600/10 border border-red-600 rounded-lg px-4 py-1 text-sm mt-2 ml-4">
+                            Delete
+                        </button>
+                    </div>
+
+                    <p><span class="text-slate-400 select-none">Destination: </span> https://google.com</p>
+                </div>
+            </div>
+
+        </div>
+</main>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

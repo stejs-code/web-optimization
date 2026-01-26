@@ -1,0 +1,243 @@
+openapi: 3.0.3
+info:
+  title: URL Shortener API
+  description: Simple URL shortener with token-based link ownership
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+  - url: https://link.zp.stejs.cz
+
+paths:
+  /{shortCode}:
+    get:
+      summary: Redirect to original URL
+      operationId: redirectLink
+      parameters:
+        - name: shortCode
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 50
+      responses:
+        '307':
+          description: Temporary redirect to original URL
+          headers:
+            Location:
+              schema:
+                type: string
+        '404':
+          description: Link not found - returns 404.html file
+
+  /_api/links:
+    get:
+      summary: List all user's links
+      operationId: listLinks
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of user's links
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  links:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Link'
+        '401':
+          description: Unauthorized - missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      summary: Create a shortened link
+      operationId: createLink
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLinkRequest'
+      responses:
+        '201':
+          description: Link created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+        '400':
+          description: Invalid request (missing url/shortCode or shortCode already exists)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /_api/links/{shortCode}:
+    get:
+      summary: Get link details
+      operationId: getLink
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: shortCode
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 50
+      responses:
+        '200':
+          description: Link details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  link:
+                    $ref: '#/components/schemas/Link'
+        '401':
+          description: Unauthorized - missing or invalid token or token doesn't match link owner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Link not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Delete a link
+      operationId: deleteLink
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: shortCode
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 50
+      responses:
+        '200':
+          description: Link deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+        '401':
+          description: Unauthorized - missing or invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Failed to delete link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /_api/links/{shortCode}/exists:
+    get:
+      summary: Check if a short code exists
+      operationId: checkLinkExists
+      parameters:
+        - name: shortCode
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 50
+      responses:
+        '200':
+          description: Existence check result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  exists:
+                    type: boolean
+        '400':
+          description: Invalid request - shortCode is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  schemas:
+    CreateLinkRequest:
+      type: object
+      required:
+        - url
+        - shortCode
+      properties:
+        url:
+          type: string
+          format: uri
+        shortCode:
+          type: string
+          maxLength: 50
+
+    Link:
+      type: object
+      properties:
+        shortCode:
+          type: string
+          maxLength: 50
+        url:
+          type: string
+          format: uri
+        visits:
+          type: integer
+          description: Number of times the link has been visited
+          readOnly: true
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        message:
+          type: string
