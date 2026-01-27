@@ -229,7 +229,6 @@ func (h *Handler) Authorize() (string, error) {
 
 	const prefix = "Bearer "
 	if !strings.HasPrefix(auth, prefix) {
-		h.Error(401, "invalid authorization header")
 		return "", errors.New("invalid authorization header")
 	}
 
