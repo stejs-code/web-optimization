@@ -3,9 +3,9 @@ import { type DocumentHead } from "@builder.io/qwik-city";
 import { Button } from "~/components/ui";
 import { Carousel } from "@qwik-ui/headless";
 
-import bannerImg from "~/img/banner.jpg";
+import bannerImg from "~/img/banner.webp";
 import JellyImg from "~/img/jelly.svg?h=700&format=webp&jsx";
-import Img1 from "~/img/1.jpg?h=700&jsx";
+import Img1 from "~/img/1.jpg?h=700&format=webp&jsx";
 import Img2 from "~/img/2.jpg?h=700&format=webp&jsx";
 import Img3 from "~/img/3.jpg?h=700&format=webp&jsx";
 import Img4 from "~/img/4.jpg?h=700&format=webp&jsx";
@@ -81,7 +81,6 @@ export default component$(() => {
                     </div>
                 </div>
             </div>
-            <Img1 alt={"Image 1"} class={"select-none touch-none"} draggable={false}/>
             {/* Carousel Section */}
             <div class="w-full bg-blue-900/10 px-4 py-14 sm:py-20">
                 <div class="mx-auto max-w-3xl">
