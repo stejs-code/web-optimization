@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Base dark theme */
+body {
+  @apply bg-slate-950 text-slate-50 antialiased min-h-screen overflow-x-hidden;
+}

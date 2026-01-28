@@ -1,0 +1,50 @@
+# Dependencies
+node_modules
+npm-debug.log*
+bun.lock
+
+# Build outputs
+dist
+server
+.vite
+.cache
+
+# Development
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+*.log
+tmp
+temp
+.tmp
+
+# Documentation
+README.md
+CLAUDE.md
+*.md
+!package.json
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# CI/CD
+.github
+.gitlab-ci.yml
