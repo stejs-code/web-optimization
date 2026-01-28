@@ -29,6 +29,7 @@ export default component$(() => {
             {/* Hero Section */}
             <div
                 class="w-full bg-cover"
+                fetchPriority={'high'}
                 style={{ backgroundImage: `url(${bannerImg})` }}
             >
                 <div class="bg-gradient-to-r from-black/50 from-30% to-black/0 px-4 pt-40 pb-30 max-md:from-100%">
