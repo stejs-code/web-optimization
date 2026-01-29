@@ -12,4 +12,30 @@ declare global {
 	}
 }
 
+// Type declarations for vite-imagetools
+declare module '*&as=srcset' {
+	const srcset: string;
+	export default srcset;
+}
+
+declare module '*?*&as=srcset' {
+	const srcset: string;
+	export default srcset;
+}
+
+declare module '*.webp?*' {
+	const src: string;
+	export default src;
+}
+
+declare module '*.jpg?*' {
+	const src: string;
+	export default src;
+}
+
+declare module '*.png?*' {
+	const src: string;
+	export default src;
+}
+
 export {};

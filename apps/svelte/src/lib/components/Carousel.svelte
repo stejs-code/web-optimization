@@ -38,6 +38,7 @@
 					<div class="flex-[0_0_100%] min-w-0">
 						<img
 							srcset={image.srcset}
+							sizes="(min-width: 768px) 768px, (min-width: 640px) 640px, 100vw"
 							alt={image.alt}
 							draggable="false"
 							class="select-none touch-none w-full h-[400px] object-cover"

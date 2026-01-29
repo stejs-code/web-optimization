@@ -2,25 +2,30 @@
 	import Button from '$lib/components/Button.svelte';
 	import Carousel from '$lib/components/Carousel.svelte';
 
-	// Import optimized images for carousel (400px height)
+	// Import optimized images for carousel (400px height) with better compression
+	// @ts-ignore
 	import img1 from '$lib/assets/1.webp?w=600;800;1200&h=400&format=webp&as=srcset';
+	// @ts-ignore
 	import img2 from '$lib/assets/2.webp?w=600;800;1200&h=400&format=webp&as=srcset';
+	// @ts-ignore
 	import img3 from '$lib/assets/3.webp?w=600;800;1200&h=400&format=webp&as=srcset';
-	import img4 from '$lib/assets/4.webp?w=600;800;1200&h=400&format=webp&as=srcset';
+	// @ts-ignore
 	import img5 from '$lib/assets/5.webp?w=600;800;1200&h=400&format=webp&as=srcset';
+	// @ts-ignore
 	import img6 from '$lib/assets/6.webp?w=600;800;1200&h=400&format=webp&as=srcset';
 
-	// Import hero banner optimized
-	import bannerSrc from '$lib/assets/banner.webp?w=1440;1920&format=webp&as=srcset';
+	// Import hero banner optimized with quality
+	// @ts-ignore
+	import bannerSrc from '$lib/assets/banner.webp?w=1440;1920&format=webp&quality=80&as=srcset';
 
-	// Import circular jellyfish optimized
-	import circularJellyfish from '$lib/assets/4.webp?w=400&format=webp';
+	// Import circular jellyfish with responsive sizes (using 4.webp exclusively for circular display)
+	// @ts-ignore
+	import circularJellyfish from '$lib/assets/4.webp?w=112;160;224;280&format=webp&quality=75&as=srcset';
 
 	const carouselImages = [
 		{ srcset: img1, alt: 'Jelly fish' },
 		{ srcset: img2, alt: 'Jelly fish' },
 		{ srcset: img3, alt: 'Jelly fish' },
-		{ srcset: img4, alt: 'Jelly fish' },
 		{ srcset: img5, alt: 'Jelly fish' },
 		{ srcset: img6, alt: 'Jelly fish' }
 	];
@@ -36,6 +41,7 @@
 	<!-- Background Image -->
 	<img
 		srcset={bannerSrc}
+		sizes="100vw"
 		alt="Jellyfish underwater"
 		fetchpriority="high"
 		class="absolute inset-0 h-full w-full object-cover"
@@ -63,7 +69,12 @@
 	<div class="mx-auto flex max-w-3xl flex-col items-start gap-x-8 px-4 sm:flex-row">
 		<!-- Image Column -->
 		<div class="mb-4 h-28 w-28 overflow-hidden rounded-full sm:mb-0 sm:h-40 sm:w-40 rotate-90">
-			<img src={circularJellyfish} alt="Jellyfish close-up" class="h-full w-full object-cover" />
+			<img
+				srcset={circularJellyfish}
+				sizes="(min-width: 640px) 160px, 112px"
+				alt="Jellyfish close-up"
+				class="h-full w-full object-cover"
+			/>
 		</div>
 
 		<!-- Text Column -->
