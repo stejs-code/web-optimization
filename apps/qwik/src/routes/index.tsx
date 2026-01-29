@@ -3,7 +3,7 @@ import { type DocumentHead } from "@builder.io/qwik-city";
 import { Button } from "~/components/ui";
 import { Carousel } from "@qwik-ui/headless";
 
-import bannerImg from "~/img/banner.webp";
+import BannerImg from "~/img/banner.webp?h=1080&jsx";
 import JellyImg from "~/img/jelly.svg?h=700&format=webp&jsx";
 import Img1 from "~/img/1.webp?h=700&jsx";
 import Img2 from "~/img/2.webp?h=700&jsx";
@@ -27,12 +27,13 @@ export default component$(() => {
     return (
         <>
             {/* Hero Section */}
-            <div
-                class="w-full bg-cover"
-                fetchPriority={'high'}
-                style={{ backgroundImage: `url(${bannerImg})` }}
-            >
-                <div class="bg-gradient-to-r from-black/50 from-30% to-black/0 px-4 pt-40 pb-30 max-md:from-100%">
+            <div class="relative w-full">
+                <BannerImg
+                    alt="Hero banner"
+                    class="absolute inset-0 h-full w-full object-cover"
+                    fetchPriority="high"
+                />
+                <div class="relative bg-gradient-to-r from-black/50 from-30% to-black/0 px-4 pt-40 pb-30 max-md:from-100%">
                     <div class="mx-auto max-w-3xl text-white">
                         <h1 class="mb-8 text-3xl font-bold sm:text-5xl sm:leading-12">
                             Lorem ipsum,
