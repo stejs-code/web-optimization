@@ -80,7 +80,7 @@ export default component$(() => {
         validate: valiForm$(LinkSchema),
     });
 
-    return <div class="space-y-8 px-4">
+    return <div class="space-y-8 px-4 max-w-3xl m-auto">
         <div class="space-y-4">
             <h1 class="text-4xl font-bold">URL Shortener</h1>
         </div>
