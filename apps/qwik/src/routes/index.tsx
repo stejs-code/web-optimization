@@ -5,12 +5,12 @@ import { Carousel } from "@qwik-ui/headless";
 
 import bannerImg from "~/img/banner.webp";
 import JellyImg from "~/img/jelly.svg?h=700&format=webp&jsx";
-import Img1 from "~/img/1.jpg?h=700&format=webp&jsx";
-import Img2 from "~/img/2.jpg?h=700&format=webp&jsx";
-import Img3 from "~/img/3.jpg?h=700&format=webp&jsx";
-import Img4 from "~/img/4.jpg?h=700&format=webp&jsx";
-import Img5 from "~/img/5.jpg?h=700&format=webp&jsx";
-import Img6 from "~/img/6.jpg?h=700&format=webp&jsx";
+import Img1 from "~/img/1.webp?h=700&jsx";
+import Img2 from "~/img/2.webp?h=700&jsx";
+import Img3 from "~/img/3.webp?h=700&jsx";
+import Img4 from "~/img/4.webp?h=700&jsx";
+import Img5 from "~/img/5.webp?h=700&jsx";
+import Img6 from "~/img/6.webp?h=700&jsx";
 
 export const carouselImages = [
     { description: "Sample description 1" },
