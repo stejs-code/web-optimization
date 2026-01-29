@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #9333ea;
+  --color-secondary: #6366f1;
+}
+
+body {
+  @apply bg-slate-950 text-slate-50 antialiased min-h-screen overflow-x-hidden;
+}
