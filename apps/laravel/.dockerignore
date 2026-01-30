@@ -1,0 +1,62 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CLAUDE.md
+AGENTS.md
+*.md
+
+# IDE
+.idea
+.vscode
+.nova
+.fleet
+
+# Dependencies
+node_modules
+vendor
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+public/build
+public/hot
+public/storage
+
+# Tests
+tests
+.phpunit.result.cache
+phpunit.xml
+
+# Development
+.editorconfig
+.styleci.yml
+.php-cs-fixer.php
+.php-cs-fixer.cache
+
+# Laravel
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Other
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+.mcp.json
+opencode.json
+boost.json

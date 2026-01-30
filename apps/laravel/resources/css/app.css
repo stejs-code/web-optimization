@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+/* Global body styles for dark ocean theme */
+body {
+    @apply bg-slate-950 text-slate-50 antialiased min-h-screen overflow-x-hidden;
+}
