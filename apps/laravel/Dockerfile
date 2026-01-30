@@ -60,8 +60,8 @@ RUN npm ci
 COPY . .
 COPY --from=composer-dependencies /var/www/html/vendor ./vendor
 
-# Build frontend assets for production
-RUN npm run build
+# Build frontend assets for production (includes image optimization)
+RUN npm run build:full
 
 # Stage 3: Production
 FROM php:8.4-fpm
@@ -112,8 +112,9 @@ WORKDIR /var/www/html
 # Copy application from composer stage
 COPY --from=composer-dependencies /var/www/html ./
 
-# Copy built assets from frontend builder
+# Copy built assets and optimized images from frontend builder
 COPY --from=frontend-builder /var/www/html/public/build ./public/build
+COPY --from=frontend-builder /var/www/html/public/img/optimized ./public/img/optimized
 
 # Copy nginx configuration
 COPY <<EOF /etc/nginx/sites-available/default
