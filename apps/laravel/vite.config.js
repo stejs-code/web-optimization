@@ -1,6 +1,7 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
+import {visualizer} from "rollup-plugin-visualizer";
 
 export default defineConfig({
     plugins: [
@@ -9,7 +10,13 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
-    ],
+        process.env.ANALYZE === 'true' && visualizer({
+            filename: process.env.ANALYZE_OUTPUT || './stats.json',
+            json: true,
+            template: 'raw-data',
+            gzipSize: true,
+        }),
+    ].filter(Boolean),
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],

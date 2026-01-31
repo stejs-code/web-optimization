@@ -241,9 +241,15 @@ bun run src/index.ts --help
 bun run src/index.ts init
 ```
 
-## CSV Output Format
+## Output Formats
 
-The generated CSV contains the following columns:
+The tool generates **two CSV files** for different use cases:
+
+### 1. Detailed CSV (`bundle-analysis.csv`)
+
+A flat table with per-module data. Perfect for filtering, sorting, and detailed analysis in spreadsheets.
+
+**Columns:**
 
 | Column | Description |
 |--------|-------------|
@@ -260,6 +266,39 @@ The generated CSV contains the following columns:
 | `percentOfProject` | Percentage this module represents of total project bundle |
 
 The CSV is sorted by project name, then by size (descending), making it easy to identify the largest dependencies in each project.
+
+### 2. Tree Graph CSV (`bundle-analysis-tree.csv`)
+
+A hierarchical format designed for creating tree visualizations (sunburst charts, treemaps, etc.).
+
+**Columns:**
+
+| Column | Description |
+|--------|-------------|
+| `name` | Node name (unique identifier in hierarchy) |
+| `parent` | Parent node name (empty for root level) |
+| `value` | Size in bytes |
+
+**Hierarchy structure:**
+```
+Project (root)
+└── Module Name (aggregated)
+    └── Individual Module Files
+```
+
+**Example:**
+```csv
+name,parent,value
+nextjs-app,,794776
+nextjs-app/react-dom,nextjs-app,170530
+nextjs-app/react-dom/node_modules/react-dom/cjs/react-dom.production.js,nextjs-app/react-dom,174618
+```
+
+**Use with:**
+- Google Charts (Treemap, Sunburst)
+- D3.js tree visualizations
+- Excel/Google Sheets hierarchical charts
+- Observable Plot
 
 ## Execution Flow
 

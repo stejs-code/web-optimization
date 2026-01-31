@@ -8,6 +8,7 @@ import { qwikCity } from "@builder.io/qwik-city/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import pkg from "./package.json";
 import tailwindcss from "@tailwindcss/vite";
+import { visualizer } from "rollup-plugin-visualizer";
 type PkgDep = Record<string, string>;
 const { dependencies = {}, devDependencies = {} } = pkg as any as {
   dependencies: PkgDep;
@@ -26,7 +27,13 @@ export default defineConfig(({ command, mode }): UserConfig => {
       qwikVite(),
       tsconfigPaths({ root: "." }),
       tailwindcss(),
-    ],
+      process.env.ANALYZE === 'true' && visualizer({
+        filename: process.env.ANALYZE_OUTPUT || './stats.json',
+        json: true,
+        template: 'raw-data',
+        gzipSize: true,
+      }),
+    ].filter(Boolean),
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.

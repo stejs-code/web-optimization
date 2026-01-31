@@ -36,4 +36,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Bundle analyzer output
 bundle-analysis.csv
+bundle-analysis-tree.csv
+*-tree.csv
 *.csv
