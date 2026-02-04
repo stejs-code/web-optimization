@@ -1,6 +1,7 @@
 import { $ } from "bun"
 import * as fs from 'node:fs/promises'
 import * as path from "node:path";
+import { parseArgs } from "util";
 
 export type Lighthouse = {
     ttfb: number, // time to first byte
@@ -47,14 +48,14 @@ export async function measureLighthouse(url: string) {
     result.lcp /= 5;
     result.tbt /= 5;
 
-    console.log(`Measured ${url}:`, result)
+    console.log(JSON.stringify({ url, ...result }))
 
     return result
 }
 
 async function readFromFile(file: Bun.BunFile): Promise<Lighthouse> {
     const json = await file.json()
-
+    console.log(json['audits']['total-blocking-time']['numericValue'])
     return {
         tbt: json['audits']['total-blocking-time']['numericValue'],
         ttfb: json['audits']['server-response-time']['numericValue'],
@@ -62,3 +63,29 @@ async function readFromFile(file: Bun.BunFile): Promise<Lighthouse> {
         lcp: json['audits']['largest-contentful-paint']['numericValue'],
     }
 }
+
+async function main() {
+    let { values: { config } } = parseArgs({
+        args: Bun.argv,
+        options: {
+            config: {
+                type: 'string',
+            },
+        },
+        strict: true,
+        allowPositionals: true,
+    });
+
+
+    config ??= './config.json'
+
+    const file = Bun.file(config)
+    const json = await file.json()
+
+
+    for (const project of json.projects) {
+        await measureLighthouse(project.url)
+    }
+}
+
+await main()

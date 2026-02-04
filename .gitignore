@@ -1,1 +1,5 @@
 node_modules
+apps/qwik/ui-specification.xml
+apps/svelte/ui-specification.xml
+apps/nextjs/ui-specification.xml
+apps/laravel/ui-specification.xml

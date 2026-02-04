@@ -1,26 +1,15 @@
-import type { NextConfig } from 'next';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+      enabled: process.env.ANALYZE === 'true',
+      openAnalyzer: false,
+      analyzerMode: 'json',
+      analyzerPort: 'auto',
+      generateStatsFile: true,
+      statsFilename: process.env.ANALYZE_OUTPUT || 'stats.json',
+    });
 
-const nextConfig: NextConfig = {
+module.exports = withBundleAnalyzer({
   output: 'standalone',
   images: {
     formats: ['image/webp', 'image/avif'],
   },
-
-  webpack: (config, { isServer }) => {
-    // Only analyze client-side bundle
-    if (process.env.ANALYZE === 'true' && !isServer) {
-      config.plugins.push(
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'json',
-            openAnalyzer: false,
-            reportFilename: process.env.ANALYZE_OUTPUT || './analyze/client.json',
-            generateStatsFile: false,
-          })
-      );
-    }
-    return config;
-  },
-};
-
-export default nextConfig;
+});

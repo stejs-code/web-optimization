@@ -13,11 +13,16 @@ export default defineConfig({
                 });
             }
         }),
-        process.env.ANALYZE === 'true' && visualizer({
-            filename: process.env.ANALYZE_OUTPUT || './stats.json',
-            json: true,
-            template: 'raw-data',
+        visualizer({
+            filename: `./temp/${Date.now()}-stats.json`,
+            template: "raw-data",
             gzipSize: true,
         }),
+
+        // visualizer({
+        //     filename: `./temp/${Date.now()}-stats.html`,
+        //     template: "treemap",
+        //     gzipSize: true,
+        // }),
     ].filter(Boolean),
 });

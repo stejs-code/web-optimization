@@ -27,13 +27,17 @@ export default defineConfig(({ command, mode }): UserConfig => {
       qwikVite(),
       tsconfigPaths({ root: "." }),
       tailwindcss(),
-      process.env.ANALYZE === 'true' && visualizer({
-        filename: process.env.ANALYZE_OUTPUT || './stats.json',
-        json: true,
+      visualizer({
+        filename:  './stats.json',
         template: 'raw-data',
         gzipSize: true,
       }),
-    ].filter(Boolean),
+      // visualizer({
+      //   filename:  './stats.html',
+      //   template: 'treemap',
+      //   gzipSize: true,
+      // }),
+    ],
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       // Put problematic deps that break bundling here, mostly those with binaries.

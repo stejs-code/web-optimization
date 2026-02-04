@@ -12,7 +12,6 @@ export default defineConfig({
         tailwindcss(),
         process.env.ANALYZE === 'true' && visualizer({
             filename: process.env.ANALYZE_OUTPUT || './stats.json',
-            json: true,
             template: 'raw-data',
             gzipSize: true,
         }),
