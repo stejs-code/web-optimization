@@ -16,7 +16,7 @@
 
 	// Import hero banner optimized with quality
 	// @ts-ignore
-	import bannerSrc from '$lib/assets/banner.webp?w=1440;1920&format=webp&quality=80&as=srcset';
+	import bannerSrc from '$lib/assets/banner.webp?w=1440;1920&format=webp&quality=60&as=srcset';
 
 	// Import circular jellyfish with responsive sizes (using 4.webp exclusively for circular display)
 	// @ts-ignore
