@@ -12,20 +12,28 @@ export type Lighthouse = {
 
 export async function measureLighthouse(url: string) {
     console.log(`Starting measuring ${url}`)
-    const execution = $`bunx lhci collect --url ${url} -n=5 --additive=false`
+    const execution = $`bunx lhci collect --url ${url} --additive=false`
 
     await execution
-
+    console.log("Getting results:")
     const files = await fs
         .readdir("./.lighthouseci")
         .then(i =>
             i
                 .filter(i => i.endsWith('.json') && i.startsWith('lhr'))
-                .map(i => Bun.file(path.join('./.lighthouseci/', i))))
+                .map(i => {
+                    const filePath = path.join('./.lighthouseci/', i);
+                    console.log("filePath:", filePath)
+                    return Bun.file(filePath)
+                }))
 
+    console.log("Results:", files)
     const results: Lighthouse[] = []
     for (const file of files) {
-        results.push(await readFromFile(file))
+        const res = await readFromFile(file)
+
+        results.push(res)
+        console.log("url:", JSON.stringify({ ...res }))
     }
 
     const result = results.reduce((previousValue, currentValue) => {
@@ -43,19 +51,22 @@ export async function measureLighthouse(url: string) {
     } satisfies Lighthouse)
 
 
-    result.ttfb /= 5;
-    result.fcp /= 5;
-    result.lcp /= 5;
-    result.tbt /= 5;
+    result.ttfb /= 10;
+    result.fcp /= 10;
+    result.lcp /= 10;
+    result.tbt /= 10;
 
+    console.log("Final Results:")
     console.log(JSON.stringify({ url, ...result }))
+
+    console.log()
+    console.log()
 
     return result
 }
 
 async function readFromFile(file: Bun.BunFile): Promise<Lighthouse> {
     const json = await file.json()
-    console.log(json['audits']['total-blocking-time']['numericValue'])
     return {
         tbt: json['audits']['total-blocking-time']['numericValue'],
         ttfb: json['audits']['server-response-time']['numericValue'],
@@ -82,10 +93,12 @@ async function main() {
     const file = Bun.file(config)
     const json = await file.json()
 
-
+    const data = [];
     for (const project of json.projects) {
-        await measureLighthouse(project.url)
+        data.push(await measureLighthouse(project.url));
     }
+
+    Bun.write('./lh-results.json', JSON.stringify(data, null, 2))
 }
 
 await main()
